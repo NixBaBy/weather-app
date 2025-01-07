@@ -46,7 +46,7 @@ export default function Home() {
         searchValue={searchValue}
       />
       <Left selectedCity={selectedCity} />
-      <Right />
+      <Right selectedCity={selectedCity} />
     </div>
   );
 }

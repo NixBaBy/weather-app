@@ -1,6 +1,6 @@
 export const Pinecone = () => {
   return (
-    <div className="absolute   w-[940px] h-[940px] rounded-[940px] border-[1px] border-muted-foreground/10 flex justify-center items-center top-[20px] left-[29vw]">
+    <div className="absolute   w-[940px] h-[940px] rounded-[940px] border-[1px] border-muted-foreground/10 flex justify-center items-center top-[0] left-[25.5vw]">
       <div className="w-[540px] h-[540px] rounded-[540px] border-[1px] border-muted-foreground/10 flex justify-center items-center">
         <div className="w-[340px] h-[340px] rounded-[340px] border-[1px] border-muted-foreground/10 flex justify-center items-center">
           <div className="flex justify-center items-center gap-[16px] w-[140px] h-[140px] bg-white rounded-[50%] ">
