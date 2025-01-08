@@ -1,11 +1,17 @@
 export const LocationLeft = ({ selectedCity }) => {
+  const today = new Date();
+
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const formattedDate = today.toLocaleDateString("en-US", options);
   return (
     <div className="flex justify-between pt-[56px] pl-[40px] pr-[40px] items-center">
       <div>
-        <p className="text-[#9CA3AF] text-[18px]">Junuary 6, 2025</p>
-        <p className="text-white text-[48px] font-bold text-black">
-          {selectedCity}
-        </p>
+        <p className="text-[#9CA3AF] text-[18px]">{formattedDate}</p>
+        <p className="text-black text-[48px] font-bold text">{selectedCity}</p>
       </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
