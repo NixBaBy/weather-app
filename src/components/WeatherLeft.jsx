@@ -4,9 +4,6 @@ import { Buttons } from "./Buttons";
 export const WeatherLeft = ({ selectedCity, weather, conditionSunny }) => {
   return (
     <div className="relative w-[414px] h-[832px]">
-      <div className="absolute right-[-40px] bottom-[-25px]">
-        <img src="/moon.svg" alt="" />
-      </div>
       <div className=" size-full rounded-[48px] bg-[rgba(255, 255, 255, 0.75)] backdrop-blur-md relative z-10 shadow-md">
         <div className="w-[398px] h-[504px]  rounded-[42px] bg-[var(--Cool-Gray-Gradient-light, linear-gradient(180deg, #F9FAFB 0%, rgba(249, 250, 251, 0.00) 100%))] ml-[8px]">
           <LocationLeft selectedCity={selectedCity} />
@@ -22,6 +19,12 @@ export const WeatherLeft = ({ selectedCity, weather, conditionSunny }) => {
           <Buttons />
         </div>
       </div>
+      <div className="absolute right-[-40px] bottom-[-25px]">
+        <img src="/moon.svg" alt="" />
+      </div>
+      {/* <div className="absolute top-[-40px] left-[-35px]">
+        <img src="/sun.svg" alt="" />
+      </div> */}
     </div>
   );
 };

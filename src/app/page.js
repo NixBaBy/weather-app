@@ -14,6 +14,8 @@ export default function Home() {
   const [night, setNight] = useState("");
   const [conditionSunny, setConditionSunny] = useState("");
   const [conditionNight, setConditionNight] = useState("");
+  const [weatherImg, setWeatherImg] = useState("");
+
   async function getData() {
     const result = await fetch("https://countriesnow.space/api/v0.1/countries");
     const data = await result.json();
@@ -40,6 +42,12 @@ export default function Home() {
   };
 
   const handlerSelect = (city) => {
+    if (weatherImg === "sunny") {
+      setWeatherImg("sunny");
+    }
+    if (weatherImg === "overcast") {
+      setWeatherImg("overcast");
+    }
     setselectedCity(city);
     setSearched([]);
     setSearchValue("");
@@ -64,6 +72,7 @@ export default function Home() {
   useEffect(() => {
     getWeather(selectedCity);
   }, []);
+
   return (
     <div className="flex relative w-[100vw] h-[100vh] justify-center items-center">
       <Pinecone />
@@ -82,6 +91,9 @@ export default function Home() {
         selectedCity={selectedCity}
         night={night}
         conditionNight={conditionNight}
+        handlerSelect={handlerSelect}
+        weatherImg={weatherImg}
+        setWeatherImg={setWeatherImg}
       />
     </div>
   );
