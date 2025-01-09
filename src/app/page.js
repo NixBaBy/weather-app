@@ -4,55 +4,17 @@ import { Right } from "../components/Right";
 import { Input } from "../components/Input";
 import { Pinecone } from "@/components/Pinecone";
 import { use, useEffect, useState } from "react";
-
+import { useGetData } from "@/utils/useGetData";
 export default function Home() {
-  const [cities, setCities] = useState([]);
-  const [searched, setSearched] = useState([]);
+  const [searched, setSearched] = useState({});
   const [selectedCity, setselectedCity] = useState("Ulan Bator");
   const [searchValue, setSearchValue] = useState("");
   const [weather, setWeather] = useState("");
   const [night, setNight] = useState("");
   const [conditionSunny, setConditionSunny] = useState("");
   const [conditionNight, setConditionNight] = useState("");
-  const [weatherImg, setWeatherImg] = useState("");
 
-  async function getData() {
-    const result = await fetch("https://countriesnow.space/api/v0.1/countries");
-    const data = await result.json();
-    let inComeCities = data.data.map((country) => {
-      return country.cities;
-    });
-    inComeCities = inComeCities.flat();
-    setCities(inComeCities);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
-  const searchHandler = (e) => {
-    const search = e.target.value.toLowerCase();
-    setSearchValue(search.toLowerCase());
-    const filtered = cities.filter((city) => {
-      if (!search) {
-        return false;
-      }
-      return city.toLowerCase().includes(search);
-    });
-    setSearched(filtered);
-  };
-
-  const handlerSelect = (city) => {
-    if (weatherImg === "sunny") {
-      setWeatherImg("sunny");
-    }
-    if (weatherImg === "overcast") {
-      setWeatherImg("overcast");
-    }
-    setselectedCity(city);
-    setSearched([]);
-    setSearchValue("");
-    getWeather(city);
-  };
+  const { cities, loading } = useGetData();
 
   async function getWeather(selectedCity) {
     const result = await fetch(
@@ -63,7 +25,6 @@ export default function Home() {
     let night = weatherData.forecast.forecastday[0].day.mintemp_c;
     let c1 = weatherData.forecast.forecastday[0].day.condition.text;
     let c2 = weatherData.forecast.forecastday[0].hour[23].condition.text;
-    console.log(weatherData);
     setConditionSunny(c1);
     setConditionNight(c2);
     setWeather(sunny);
@@ -72,6 +33,26 @@ export default function Home() {
   useEffect(() => {
     getWeather(selectedCity);
   }, []);
+
+  const searchHandler = (e) => {
+    const search = e.target.value.toLowerCase();
+    setSearchValue(search.toLowerCase());
+    const filtered = cities.filter((city) => {
+      const city1 = city.city;
+      if (!search) {
+        return false;
+      }
+      return city1.toLowerCase().includes(search);
+    });
+    setSearched(filtered);
+  };
+
+  const handlerSelect = (city) => {
+    setselectedCity(city);
+    setSearched([]);
+    setSearchValue("");
+    getWeather(city);
+  };
 
   return (
     <div className="flex relative w-[100vw] h-[100vh] justify-center items-center">
@@ -91,9 +72,6 @@ export default function Home() {
         selectedCity={selectedCity}
         night={night}
         conditionNight={conditionNight}
-        handlerSelect={handlerSelect}
-        weatherImg={weatherImg}
-        setWeatherImg={setWeatherImg}
       />
     </div>
   );

@@ -21,19 +21,19 @@ export const Input = ({ search, searched, handlerSelect, searchValue }) => {
         value={searchValue}
         placeholder="Search"
         onChange={search}
-        className="w-[567px] min-w-[320px]  text-[32px] rounded-[48px] placeholder:text-gray placeholder:text-[32px] placeholder:font-bold pl-[60px] flex items-center"
+        className="w-[567px] min-w-[320px]  text-[32px] rounded-[48px] placeholder:text-gray placeholder:text-[32px] placeholder:font-bold pl-[60px] flex items-center focus:outline-none"
       />
 
       {searched.length > 0 && (
         <div className="rounded-[24px] bg-white w-[512px] py-[16px] absolute z-10">
-          {searched.slice(0, 10).map((city, index) => (
+          {searched.slice(0, 10).map((country, index) => (
             <button
-              onClick={() => handlerSelect(city)}
+              onClick={() => handlerSelect(country.city)}
               className="text-[26px] font-bold flex items-center "
               key={index}
             >
               <img src="/location.svg" alt="" />
-              {city}
+              {country.city + ", " + country.country}
             </button>
           ))}
         </div>
