@@ -1,8 +1,8 @@
 import { Location } from "../components/Loaction";
 import { WeatherNumberRight } from "./WeatherNumberRight";
 import { Buttons } from "./Buttons";
-
-export const Weather = ({ selectedCity, night, conditionNight }) => {
+import { Skeleton } from "./Skeleton";
+export const Weather = ({ selectedCity, weather, loading }) => {
   const weatherImg = (conditionNight) => {
     const condition = conditionNight.toLowerCase();
     switch (true) {
@@ -21,6 +21,8 @@ export const Weather = ({ selectedCity, night, conditionNight }) => {
         return "/cloudyRight.svg";
       case condition.includes("overcast"):
         return "/cloudyRight.svg";
+      default:
+        return "/clearRight.svg";
     }
   };
   return (
@@ -29,17 +31,19 @@ export const Weather = ({ selectedCity, night, conditionNight }) => {
         <div className="w-[398px] h-[504px] rounded-[42px] bg-[linear-gradient(180deg, #111827 0%, #101624 100%)] ml-[8px] ">
           <Location selectedCity={selectedCity} />
           <div className=" flex justify-center">
-            {
+            {loading ? (
+              <Skeleton />
+            ) : (
               <img
-                src={weatherImg(conditionNight)}
+                src={weatherImg(weather.conditionNight)}
                 alt=""
                 className="w-[264px] h-[264px]"
               />
-            }
+            )}
           </div>
         </div>
         <div className="mt-[-10px]">
-          <WeatherNumberRight night={night} conditionNight={conditionNight} />
+          <WeatherNumberRight weather={weather} />
 
           <Buttons />
         </div>

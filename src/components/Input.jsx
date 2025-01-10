@@ -1,8 +1,8 @@
 export const Input = ({ search, searched, handlerSelect, searchValue }) => {
   return (
-    <div className="absolute top-[40px] left-[40px] z-50  ">
+    <div className="absolute top-[40px] left-[40px] z-50   ">
       <svg
-        className="absolute ml-[10px] mx-[5px]"
+        className="absolute ml-[10px] mt-[11px]"
         xmlns="http://www.w3.org/2000/svg"
         width="44"
         height="44"
@@ -21,7 +21,7 @@ export const Input = ({ search, searched, handlerSelect, searchValue }) => {
         value={searchValue}
         placeholder="Search"
         onChange={search}
-        className="w-[567px] min-w-[320px]  text-[32px] rounded-[48px] placeholder:text-gray placeholder:text-[32px] placeholder:font-bold pl-[60px] flex items-center focus:outline-none"
+        className="w-[567px] min-w-[320px] py-[10px]  text-[32px] rounded-[48px] placeholder:text-gray placeholder:text-[32px] placeholder:font-bold pl-[60px] flex items-center focus:outline-none"
       />
 
       {searched.length > 0 && (
